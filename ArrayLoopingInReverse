@@ -1,0 +1,26 @@
+#include <stdio.h>
+int main()
+{
+	int size, i;
+	int arr[20];
+	
+	printf("Input number of elements in the array: ");
+	scanf("%d", &size);
+	printf("Input values:\n");
+	
+	for (i=0; i<size; i++)
+	{
+		scanf("%d", &arr[i]);
+	}
+	
+	printf("Values in reverse order:\n");
+	
+	for(i=size-1; i>=0; i--)
+	{
+		printf("%d\n", arr[i]);
+	}
+	
+	
+	
+	return 0;
+}
