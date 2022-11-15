@@ -1,0 +1,30 @@
+printf // to print the parameters ("")
+scanf // use to get the user input
+
+format specifier
+%d,%i = int
+%c = char
+%s = string
+%f = float
+%d = double
+
+variables
+int = integer ( for whole numbers)
+char = character ( for single letter)
+float = for numbers with decimals
+douuble = for numbers with  decimal but double the size of float
+
+operators
+// for single line comment
+/* */ for multi line comment
+= assign the value of the right from left
+== equal
+!= not equal
+<= less than or equal
+>= greater than or equal
++= add the two numbers and assign the value of the answer to the right ( ex. num1 += numb2 is the same as num1 = num1 + num2)
+-=
+*=
+/=
+%=
+% modulo ( division but will only get the remainder)
