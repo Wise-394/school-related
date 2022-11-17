@@ -8,3 +8,7 @@ Functions,
 Pointers,
 For loops,
 While loops, if statements
+
+C-Notes: all related notes in C 
+
+C-challenges: list of some of the challenges i did on c
