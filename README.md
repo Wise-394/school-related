@@ -7,4 +7,4 @@ Arrays,
 Functions,
 Pointers,
 For loops,
-While loops
+While loops, if statements
