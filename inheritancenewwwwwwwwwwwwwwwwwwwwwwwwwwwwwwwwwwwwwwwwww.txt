@@ -1,0 +1,206 @@
+//////////////////////////libraryItem
+package inheritance;
+
+public class LibraryItem 
+{
+	int id;
+	String title,author;
+	boolean isCheckedOut;
+	String dueDate;
+	
+	public void setId(int idToSet) {
+		this.id = idToSet;
+	}
+	public int getId() {
+		return this.id;
+	}
+	public String itemInfo(){
+		return "id:" + this.id + " ||TITLE: " + this.title + "	made by:" + this.author +"	------AVAILABLE: " + this.isCheckedOut; 
+	}
+
+	
+
+}
+class Book extends LibraryItem
+{
+	int numPages;
+	String publisher;
+	
+	Book(int id,String title,String author,boolean isCheckedOut,String dueDate,int numOfPages,String publisher)
+	{
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.isCheckedOut = isCheckedOut;
+		this.dueDate = dueDate;
+		this.numPages = numOfPages;
+		this.publisher = publisher;
+	}
+		}
+class DVD extends LibraryItem{
+	int runtime;
+	String director;
+	DVD(int id,String title,String author,boolean isCheckedOut,String dueDate,int runtime,String director)
+	{
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.isCheckedOut = isCheckedOut;
+		this.dueDate = dueDate;
+		this.runtime = runtime;
+		this.director = director;
+	}
+}
+
+/////////////////////////////////////////////////////////////////////Library
+package inheritance;
+
+
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Library {
+	public static List <LibraryItem> items = new ArrayList<>();
+	public static int idRemoved = 4;
+	Scanner scn = new Scanner(System.in);
+
+	//sample items
+	Book myBook1 = new Book(1,"One Piece","oda",true,"mar1",1069,"Queen bee");
+	Book myBook2 = new Book(2,"Steings;Gate","Unknown",true,"mar1",100000,"King Bee");
+	DVD myDVD1 = new DVD(3,"Dota o Ako","Justine Lustre",true,"mar1",12,"Queen Wasp");
+	void addDefaultItem() {
+		items.add(myBook1);
+		items.add(myBook2);
+		items.add(myDVD1);
+	}
+	
+	void addLibraryItem(Boolean isBook)
+	{
+		int id = idRemoved;
+		System.out.println("Title :"); String title = scn.nextLine();
+		System.out.println("Author :"); String author = scn.nextLine();
+		boolean isCheckedOut = true;
+		String DueDate = null;
+		if(isBook) 
+		{
+			System.out.println("No. of pages: "); int numOfPages = scn.nextInt(); scn.nextLine();
+			System.out.println("Publisher: "); String publisher = scn.nextLine();
+			Book myBook = new Book(id,title,author,isCheckedOut,DueDate,numOfPages,publisher);
+			items.add(myBook);
+		}
+		else 
+		{
+			System.out.println("Runtime: "); int runtime = scn.nextInt();	scn.nextLine();
+			System.out.println("Director: "); String director = scn.nextLine();
+			DVD myDVD = new DVD(id,title,author,isCheckedOut,DueDate,runtime,director);
+			items.add(myDVD);
+		}
+		idRemoved = items.size()+1;
+	}
+	void removeLibraryItem() 
+	{
+		viewLibrary();
+		System.out.println("Item ID:"); int idToRemove = scn.nextInt();
+		boolean removed = false;
+		idRemoved = idToRemove;
+
+		items.remove(idToRemove-1);
+	}
+	void viewLibrary() 
+	{	
+		 System.out.println("Library Items:");
+		 for (LibraryItem item : items) {
+			System.out.println(item.itemInfo());
+		 }
+		 scn.nextLine();
+	}
+	void checkoutItem() 
+	{
+		System.out.println("enter ID: "); int idToCheckout = scn.nextInt(); scn.nextLine();
+		LibraryItem itemToCheckout = items.get(idToCheckout-1);	
+			if(!itemToCheckout.isCheckedOut) 
+			{
+				System.out.println("ERROR THE ITEM IS ALREADY CHECKED OUT/WRONG ID");
+			}
+			else {
+				itemToCheckout.isCheckedOut = true;
+				items.set(idToCheckout-1, itemToCheckout);
+				System.out.println("ITEM SUCCESFULLY CHECKED OUT");
+			}
+		}
+	void returnItem() 
+	{
+		for(LibraryItem items : items) 
+		{
+			if(!items.isCheckedOut) 
+			{
+				System.out.println(items.itemInfo());
+			}
+		}
+		System.out.println("SUCCESSFULLY RETURNED ALL ITEMS");
+	}
+}
+
+
+//////////////////////////////////////////main
+
+package inheritance;
+
+import java.util.Scanner;
+
+public class Main {
+public static void main(String[] args) {
+		Library lib = new Library();
+		lib.addDefaultItem();
+	while(true) {	
+		Scanner scn = new Scanner(System.in);
+		System.out.println("LIBRARY");
+		System.out.println("1:VIEW LIBRARY ITEMS");
+		System.out.println("2.ADD LIBRARY ITEMS");
+		System.out.println("3.REMOVE LIBRARY ITEMS");
+		System.out.println("4:CHECKOUT ITEM");
+		System.out.println("5:RETURN ITEM");
+		System.out.println("6:EXIT");
+		
+		int operation = scn.nextInt(); scn.nextLine();
+		
+		if(operation == 1) 
+		{
+			lib.viewLibrary();
+		}
+		else if(operation == 2) 
+		{
+			System.out.println("1:BOOK \n2:DVD");
+			int itemType = scn.nextInt();
+			switch(itemType) 
+			{
+			case 1:
+				lib.addLibraryItem(true);
+				break;
+			case 2:
+				lib.addLibraryItem(false);
+				break;
+			}	
+		}
+		else if(operation == 3) 
+		{
+			lib.removeLibraryItem();
+		}
+		else if(operation == 4) 
+		{
+			lib.checkoutItem();
+		}
+		else if(operation == 5) 
+		{
+			lib.returnItem();
+		}
+		else if(operation == 6) 
+		{
+			System.exit(0);
+		}
+		
+	}
+}
+}
